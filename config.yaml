@@ -1,0 +1,11 @@
+local:
+  mqtt_server: mqtt
+  dex_server: dex
+
+production1:
+  mqtt_server: mqtt
+  dex_server: dex
+
+production2:
+  mqtt_server: mqtt
+  dex_server: dex
