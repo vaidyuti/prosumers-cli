@@ -27,8 +27,6 @@ def load_config() -> dict[str, Env] | None:
         with open("config.yaml", "r") as stream:
             data = yaml.safe_load(stream)
             return {k: Env(_env=k, **v) for k, v in data.items()} if data else None
-    except yaml.YAMLError as ex:
-        click.echo(click.style(ex, fg="red"))
     except Exception as ex:
         click.echo(click.style(ex, fg="red"))
 

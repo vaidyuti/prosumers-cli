@@ -1,0 +1,10 @@
+category: LI-ION
+
+total_energy: 14 # in kWh
+usable_energy: 13.5
+
+max_charge: 5.0 # in kW
+max_grid_charge: 3.3 # in kW
+max_discharge: 5.0 # in kW
+
+round_trip_efficiency: 0.9

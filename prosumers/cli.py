@@ -2,6 +2,7 @@ import click
 from click import echo, style
 
 from .config import inspect_config, list_config_envs, load_config
+from .scenario import read_scenario
 
 
 @click.group()
@@ -23,7 +24,12 @@ def run(scenario, env, verbose):
 @click.argument("scenario", default="scenario.yaml", required=False)
 def verify(scenario):
     """Verifies the integrity of the scenario file."""
-    echo("Verifying '{0}'".format(scenario))
+    echo("Verifying '{0}'...".format(scenario))
+    try:
+        obj = read_scenario(scenario)
+        echo(click.style(f"Verified.", fg="bright_green", bold=True))
+    except Exception as ex:
+        echo(click.style(ex, fg="red", bold=True))
 
 
 @click.command()

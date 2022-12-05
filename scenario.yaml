@@ -1,0 +1,13 @@
+version: 1
+
+peers:
+  - id: "0001"
+    location: "0.1, 0.1"
+    generations:
+      - category: SOLAR
+        profile: "./scenario/profiles/0001/generations/001.csv"
+    consumptions:
+      - category: GENERAL
+        profile: "./scenario/profiles/0001/consumptions/001.csv"
+    storage:
+      - "./storages/tesla-powerwall-2.yaml"
