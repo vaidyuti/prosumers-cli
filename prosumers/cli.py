@@ -1,6 +1,7 @@
 import click
+from click import echo, style
 
-from .config import inspect_config, list_config_envs
+from .config import inspect_config, list_config_envs, load_config
 
 
 @click.group()
@@ -15,29 +16,37 @@ def cli():
 @click.option("--verbose", "-v", is_flag=True, help="Run in verbose mode.")
 def run(scenario, env, verbose):
     """Runs the emulation with the scenario file."""
-    click.echo("Verifying '{0}'".format(scenario))
+    echo("Verifying '{0}'".format(scenario))
 
 
 @click.command()
 @click.argument("scenario", default="scenario.yaml", required=False)
 def verify(scenario):
     """Verifies the integrity of the scenario file."""
-    click.echo("Verifying '{0}'".format(scenario))
+    echo("Verifying '{0}'".format(scenario))
 
 
 @click.command()
 @click.argument("env", default="local", required=False)
-def config(env):
+@click.option("--all", "-a", is_flag=True, help="Show all configurations.")
+def config(env, all):
     """Show/edit the configurations of various environments."""
-    env_config = inspect_config(env)
-    if env_config:
-        env_config.detail()
+    if all:
+        config = load_config()
+        if config != None:
+            envs = config.values()
+            echo(style("{0} environments found.\n".format(len(envs)), fg="black"))
+            div = style("-" * 64, fg="black")
+            echo(div)
+            for env in envs:
+                env.detail()
+                echo(div)
     else:
-        click.echo(
-            click.style(
-                "No configuration for '{0}' env was found.".format(env), fg="yellow"
-            )
-        )
+        env_config = inspect_config(env)
+        if env_config:
+            env_config.detail()
+        else:
+            echo(style("No config for '{0}' env was found.".format(env), fg="yellow"))
 
 
 @click.command()
@@ -45,11 +54,11 @@ def list_configs():
     """Lists all configured environments."""
     envs = list_config_envs()
     if envs:
-        click.echo(click.style("{0} environments found.".format(len(envs)), fg="black"))
+        echo(style("{0} environments found.".format(len(envs)), fg="black"))
         for env in envs:
-            click.echo(env)
+            echo(env)
     else:
-        click.echo(click.style("No environments configured.", fg="black"))
+        echo(style("No environments configured.", fg="black"))
 
 
 cli.add_command(run)
