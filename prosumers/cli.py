@@ -31,7 +31,7 @@ def config(env):
     """Show/edit the configurations of various environments."""
     env_config = inspect_config(env)
     if env_config:
-        click.echo(env_config)
+        env_config.detail()
     else:
         click.echo(
             click.style(
