@@ -5,15 +5,6 @@ from .config import inspect_config, list_config_envs, load_config
 from .scenario import read_scenario
 
 
-def verify(scenario):
-    echo("Verifying '{0}'...".format(scenario))
-    try:
-        obj = read_scenario(scenario)
-        echo(click.style(f"Verified.", fg="bright_green", bold=True))
-    except Exception as ex:
-        echo(click.style(ex, fg="red", bold=True))
-
-
 def config(env, all):
     if all:
         config = load_config()
@@ -41,3 +32,21 @@ def list_configs():
             echo(env)
     else:
         echo(style("No environments configured.", fg="black"))
+
+
+def verify(scenario):
+    echo("Verifying '{0}'...".format(scenario))
+    try:
+        obj = read_scenario(scenario)
+        echo(click.style(f"Verified.", fg="bright_green", bold=True))
+    except Exception as ex:
+        echo(click.style(ex, fg="red"))
+
+
+def run(scenario, env, verbose):
+    try:
+        env_obj = inspect_config(env)
+        scenario_obj = read_scenario(scenario)
+    except Exception as ex:
+        echo(click.style(ex, fg="red"))
+        return

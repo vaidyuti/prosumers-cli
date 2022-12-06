@@ -37,7 +37,7 @@ def verify(scenario):
 @click.option("--verbose", "-v", is_flag=True, help="Run in verbose mode.")
 def run(scenario, env, verbose):
     """Runs the emulation with the scenario file."""
-    commands.verify(scenario)
+    commands.run(scenario, env, verbose)
 
 
 cli.add_command(run)
