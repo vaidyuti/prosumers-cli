@@ -1,11 +1,4 @@
 local:
-  mqtt_server: tcp://10.0.0.7/nginx/vai/mqtt:1883/
+  mqtt_host: broker.emqx.io
+  mqtt_port: 1883
   dex_server: http://10.0.0.7/nginx/vai/dex/api/v1/
-
-dev:
-  mqtt_server: tcp://mqtt.dev.vaidyuti.in:1883/
-  dex_server: https://dex.dev.vaidyuti.in/api/v1/
-
-staging:
-  mqtt_server: tcp://mqtt.staging.vaidyuti.in:1883/
-  dex_server: https://dex.staging.vaidyuti.in/api/v1/

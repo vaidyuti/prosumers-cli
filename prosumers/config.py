@@ -11,7 +11,8 @@ class Env:
 
     _env: Optional[str]
 
-    mqtt_server: str
+    mqtt_host: str
+    mqtt_port: int
     dex_server: str
 
     def detail(self):
