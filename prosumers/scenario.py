@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 import yaml
 import csv
+from .config import Env
 
 TimeSeriesProfile = list[float]
 

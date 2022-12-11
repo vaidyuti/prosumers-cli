@@ -3,6 +3,7 @@ import click
 
 from .config import inspect_config, list_config_envs, load_config
 from .scenario import read_scenario
+from .core import RunnableScenario
 
 
 def config(env, all):
@@ -47,6 +48,7 @@ def run(scenario, env, verbose):
     try:
         env_obj = inspect_config(env)
         scenario_obj = read_scenario(scenario)
+        process = RunnableScenario(scenario_obj, env_obj)
+        process.run()
     except Exception as ex:
         echo(click.style(ex, fg="red"))
-        return
